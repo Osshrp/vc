@@ -1,0 +1,7 @@
+Metrics/LineLength:
+  Max: 150
+Documentation:
+  Enabled: false
+Lint/AssignmentInCondition:
+  StyleGuide: '#safe-assignment-in-condition'
+  Enabled: false
