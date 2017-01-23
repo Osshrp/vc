@@ -23,15 +23,22 @@ describe FeedbacksController, type: :request do
     end
   end
 
+  describe "POST #create" do
+    before do
+      post feedbacks_url, as: :json,
+        params: { "feedback":
+                  {
+                    "email": "test@examle.com",
+                    "body": "Some text"
+                  }
+                }
+    end
+    it "has a 201 status code" do
+      expect(response.status).to eq(201)
+    end
 
-  # describe "POST #create" do
-  #   it "creates the new feedback" do
-  #     post feedbacks_url, as: :json,
-  #       params: { "feedback":
-  #                 {
-  #                   "email": "test@examle.com",
-  #                   "body": "Some text"
-  #                 }
-  #               },
-  # end
+    it "returns 'Feedback created'" do
+      expect(JSON.parse(response.body)).to include("Feedback created")
+    end
+  end
 end
