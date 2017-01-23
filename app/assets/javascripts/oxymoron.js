@@ -80,6 +80,91 @@ angular.module("oxymoron.config.states", [])
     $stateProvider.rails = function () {
       $stateProvider
       
+        .state('feedbacks_path', {
+          url: '/feedbacks',
+          
+          templateUrl: function(params) {
+            params['ng-view']='';
+            
+            
+            return Routes['feedbacks_path'](params);
+          },
+          controller: 'FeedbacksCtrl as ctrl',
+          resolve: {
+            action: ['$stateParams', function ($stateParams) {
+              return resolve('index', $stateParams)
+            }]
+          }
+        })
+      
+        .state('new_feedback_path', {
+          url: '/feedbacks/new',
+          
+          templateUrl: function(params) {
+            params['ng-view']='';
+            
+            
+            return Routes['new_feedback_path'](params);
+          },
+          controller: 'FeedbacksCtrl as ctrl',
+          resolve: {
+            action: ['$stateParams', function ($stateParams) {
+              return resolve('new', $stateParams)
+            }]
+          }
+        })
+      
+        .state('edit_feedback_path', {
+          url: '/feedbacks/:id/edit',
+          
+          templateUrl: function(params) {
+            params['ng-view']='';
+            
+            
+            return Routes['edit_feedback_path'](params);
+          },
+          controller: 'FeedbacksCtrl as ctrl',
+          resolve: {
+            action: ['$stateParams', function ($stateParams) {
+              return resolve('edit', $stateParams)
+            }]
+          }
+        })
+      
+        .state('feedback_path', {
+          url: '/feedbacks/:id',
+          
+          templateUrl: function(params) {
+            params['ng-view']='';
+            
+            
+            return Routes['feedback_path'](params);
+          },
+          controller: 'FeedbacksCtrl as ctrl',
+          resolve: {
+            action: ['$stateParams', function ($stateParams) {
+              return resolve('show', $stateParams)
+            }]
+          }
+        })
+      
+        .state('root_path', {
+          url: '/',
+          
+          templateUrl: function(params) {
+            params['ng-view']='';
+            
+            
+            return Routes['root_path'](params);
+          },
+          controller: 'FeedbacksCtrl as ctrl',
+          resolve: {
+            action: ['$stateParams', function ($stateParams) {
+              return resolve('index', $stateParams)
+            }]
+          }
+        })
+      
       return $stateProvider;
     }
   }])
@@ -142,6 +227,28 @@ angular.module("oxymoron.services.resources", [])
     };
   }])
 
+  
+    .factory('Feedback', ['$resource', 'resourceDecorator', function ($resource, resourceDecorator) {
+      return resourceDecorator($resource('/feedbacks/:id.json', {"id":"@id"}, {
+        "new": {
+          "method": "GET",
+          "url": "/feedbacks/:id/new.json"
+        },
+        "edit": {
+          "method": "GET",
+          "url": "/feedbacks/:id/edit.json"
+        },
+        "update": {
+          "method": "PUT"
+        },
+        "create": {
+          "method": "POST"
+        },
+        "destroy": {
+          "method": "DELETE"
+        }
+      }));
+    }])
   
 angular.module("oxymoron.services.sign", [])
   .service('Sign', ['$http', function ($http) {
@@ -393,7 +500,7 @@ angular.module("oxymoron.directives", ['oxymoron.directives.fileupload', 'oxymor
 (function () {
   var Routes = function () {
     var self = this,
-        routes = {};
+        routes = {"feedbacks":{"defaults":{},"path":"/feedbacks"},"new_feedback":{"defaults":{},"path":"/feedbacks/new"},"edit_feedback":{"defaults":{},"path":"/feedbacks/:id/edit"},"feedback":{"defaults":{},"path":"/feedbacks/:id"},"root":{"defaults":{},"path":"/"}};
 
     self.defaultParams = {}
 
