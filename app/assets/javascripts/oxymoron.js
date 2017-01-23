@@ -80,74 +80,6 @@ angular.module("oxymoron.config.states", [])
     $stateProvider.rails = function () {
       $stateProvider
       
-        .state('rails_info_properties_path', {
-          url: '/rails/info/properties',
-          
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            
-            return Routes['rails_info_properties_path'](params);
-          },
-          controller: 'RailsInfoCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('properties', $stateParams)
-            }]
-          }
-        })
-      
-        .state('rails_info_routes_path', {
-          url: '/rails/info/routes',
-          
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            
-            return Routes['rails_info_routes_path'](params);
-          },
-          controller: 'RailsInfoCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('routes', $stateParams)
-            }]
-          }
-        })
-      
-        .state('rails_info_path', {
-          url: '/rails/info',
-          
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            
-            return Routes['rails_info_path'](params);
-          },
-          controller: 'RailsInfoCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('index', $stateParams)
-            }]
-          }
-        })
-      
-        .state('rails_mailers_path', {
-          url: '/rails/mailers',
-          
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            
-            return Routes['rails_mailers_path'](params);
-          },
-          controller: 'RailsMailersCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('index', $stateParams)
-            }]
-          }
-        })
-      
       return $stateProvider;
     }
   }])
@@ -178,7 +110,7 @@ angular.module("oxymoron.config.states", [])
   ])
 angular.module("oxymoron.config.debug", [])
 .config(['$compileProvider', function ($compileProvider) {
-  $compileProvider.debugInfoEnabled(true);
+  $compileProvider.debugInfoEnabled(false);
 }]);
 
 angular.module("oxymoron.config", ['oxymoron.config.http', 'oxymoron.config.states', 'oxymoron.config.debug'])
@@ -461,7 +393,7 @@ angular.module("oxymoron.directives", ['oxymoron.directives.fileupload', 'oxymor
 (function () {
   var Routes = function () {
     var self = this,
-        routes = {"rails_info_properties":{"defaults":{},"path":"/rails/info/properties"},"rails_info_routes":{"defaults":{},"path":"/rails/info/routes"},"rails_info":{"defaults":{},"path":"/rails/info"},"rails_mailers":{"defaults":{},"path":"/rails/mailers"}};
+        routes = {};
 
     self.defaultParams = {}
 
