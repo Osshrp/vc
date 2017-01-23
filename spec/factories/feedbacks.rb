@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :feedback do
-    email 'MyString'
+    email 'test@example.com'
     body 'MyText'
   end
 end
