@@ -1,0 +1,18 @@
+%h1 feedbacks
+
+%input.form-control(type='text' ng-model='search' placeholder='Поиск')
+%br
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Date
+      %th Email
+      %th
+  %tbody
+    %tr(ng-repeat='feedback in ctrl.feedbacks | filter:search')
+      %td(ng-bind="feedback.created_at | date:'dd.MM.yyyy'")
+      %td
+        %a(ui-sref='feedback_path(feedback)' ng-bind='feedback.email')
+      %td.w1
+        %a.btn.btn-danger(ng-click='ctrl.destroy(feedback)') Удалить
+        %a.btn.btn-primary(ui-sref='edit_feedback_path(feedback)') Редактировать

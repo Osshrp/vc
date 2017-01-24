@@ -1,0 +1,18 @@
+!!! 5
+%html(ng-app='app')
+  %head
+    %meta(charset='utf-8')
+    %title Vc
+    %base(href='/')
+    = stylesheet_link_tag    'application'
+  %body
+    .container
+      .navbar.navbar-default
+        .container-fluid
+          %ul.nav.navbar-nav
+            %li(ui-sref-active='active')
+              %a(ui-sref='feedbacks_path') All feedbacks
+            %li(ui-sref-active='active')
+              %a(ui-sref='new_feedback_path') Feedback
+      %ui-view
+    = javascript_include_tag 'application'

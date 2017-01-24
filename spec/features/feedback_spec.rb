@@ -6,7 +6,7 @@ feature "Visitor leave feedback" do
   end
 
   scenario "they whant to fill form", js: true do
-    click_on 'feedback'
+    click_on 'Feedback'
     fill_in 'Email', with: 'test@example.com'
     fill_in 'Message', with: 'Some message'
     click_on 'Submit'

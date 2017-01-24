@@ -1,0 +1,9 @@
+= form_for Feedback.new do |f|
+  .form-group
+    = f.label :email
+    = f.text_field :email, class: 'form-control'
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control'
+  = f.submit 'Save', class: 'btn btn-primary'
+  %a.btn.btn-danger(ng-click='ctrl.destroy(ctrl.feedback)' ng-if='ctrl.feedback.id') Destroy
