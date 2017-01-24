@@ -12,10 +12,8 @@ class FeedbacksController < ApplicationController
   end
 
   def create
-    @feedback = Feedback.new feedback_params
-    @feedback.save
-    # respond_with @feedback
-    render json: { msg: "Feedback created" }
+    @feedback = Feedback.create feedback_params
+    respond_with @feedback
   end
 
   private
