@@ -10,7 +10,7 @@
       %th
   %tbody
     %tr(ng-repeat='feedback in ctrl.feedbacks | filter:search')
-      %td(ng-bind="feedback.created_at | date:'dd.MM.yyyy'")
+      %td(ng-bind="feedback.created_at | date:'dd.MM.yyyy HH:mm'")
       %td
         %a(ui-sref='feedback_path(feedback)' ng-bind='feedback.email')
       %td.w1
