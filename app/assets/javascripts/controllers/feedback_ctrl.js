@@ -1,5 +1,11 @@
 app.controller('FeedbacksCtrl', ['Feedback', 'action', function (Feedback, action) {
     var ctrl = this;
+    ctrl.showForm = false;
+    ctrl.activateForm = activateForm;
+
+    function activateForm() {
+      ctrl.showForm = true;
+    }
     // Код отработает только для  '/feedbacks'
     action('index', function(){
       ctrl.feedbacks = Feedback.query();

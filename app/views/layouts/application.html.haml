@@ -13,6 +13,6 @@
             %li(ui-sref-active='active')
               %a(ui-sref='feedbacks_path') All feedbacks
             %li(ui-sref-active='active')
-              %a(ui-sref='new_feedback_path' ng-click='feedback.show=true') New feedback
+              %a(href='#' ng-click='ctrl.activateForm()') New feedback
       %ui-view
     = javascript_include_tag 'application'
