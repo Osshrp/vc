@@ -233,6 +233,74 @@ angular.module("oxymoron.config.states", [])
           }
         })
       
+        .state('photos_path', {
+          url: '/photos',
+          
+          templateUrl: function(params) {
+            params['ng-view']='';
+            
+            
+            return Routes['photos_path'](params);
+          },
+          controller: 'PhotosCtrl as ctrl',
+          resolve: {
+            action: ['$stateParams', function ($stateParams) {
+              return resolve('index', $stateParams)
+            }]
+          }
+        })
+      
+        .state('new_photo_path', {
+          url: '/photos/new',
+          
+          templateUrl: function(params) {
+            params['ng-view']='';
+            
+            
+            return Routes['new_photo_path'](params);
+          },
+          controller: 'PhotosCtrl as ctrl',
+          resolve: {
+            action: ['$stateParams', function ($stateParams) {
+              return resolve('new', $stateParams)
+            }]
+          }
+        })
+      
+        .state('edit_photo_path', {
+          url: '/photos/:id/edit',
+          
+          templateUrl: function(params) {
+            params['ng-view']='';
+            
+            
+            return Routes['edit_photo_path'](params);
+          },
+          controller: 'PhotosCtrl as ctrl',
+          resolve: {
+            action: ['$stateParams', function ($stateParams) {
+              return resolve('edit', $stateParams)
+            }]
+          }
+        })
+      
+        .state('photo_path', {
+          url: '/photos/:id',
+          
+          templateUrl: function(params) {
+            params['ng-view']='';
+            
+            
+            return Routes['photo_path'](params);
+          },
+          controller: 'PhotosCtrl as ctrl',
+          resolve: {
+            action: ['$stateParams', function ($stateParams) {
+              return resolve('show', $stateParams)
+            }]
+          }
+        })
+      
       return $stateProvider;
     }
   }])
@@ -305,6 +373,28 @@ angular.module("oxymoron.services.resources", [])
         "edit": {
           "method": "GET",
           "url": "/feedbacks/:id/edit.json"
+        },
+        "update": {
+          "method": "PUT"
+        },
+        "create": {
+          "method": "POST"
+        },
+        "destroy": {
+          "method": "DELETE"
+        }
+      }));
+    }])
+  
+    .factory('Photo', ['$resource', 'resourceDecorator', function ($resource, resourceDecorator) {
+      return resourceDecorator($resource('/photos/:id.json', {"id":"@id"}, {
+        "new": {
+          "method": "GET",
+          "url": "/photos/:id/new.json"
+        },
+        "edit": {
+          "method": "GET",
+          "url": "/photos/:id/edit.json"
         },
         "update": {
           "method": "PUT"
@@ -568,7 +658,7 @@ angular.module("oxymoron.directives", ['oxymoron.directives.fileupload', 'oxymor
 (function () {
   var Routes = function () {
     var self = this,
-        routes = {"rails_info_properties":{"defaults":{},"path":"/rails/info/properties"},"rails_info_routes":{"defaults":{},"path":"/rails/info/routes"},"rails_info":{"defaults":{},"path":"/rails/info"},"rails_mailers":{"defaults":{},"path":"/rails/mailers"},"feedbacks":{"defaults":{},"path":"/feedbacks"},"new_feedback":{"defaults":{},"path":"/feedbacks/new"},"edit_feedback":{"defaults":{},"path":"/feedbacks/:id/edit"},"feedback":{"defaults":{},"path":"/feedbacks/:id"},"root":{"defaults":{},"path":"/"}};
+        routes = {"rails_info_properties":{"defaults":{},"path":"/rails/info/properties"},"rails_info_routes":{"defaults":{},"path":"/rails/info/routes"},"rails_info":{"defaults":{},"path":"/rails/info"},"rails_mailers":{"defaults":{},"path":"/rails/mailers"},"feedbacks":{"defaults":{},"path":"/feedbacks"},"new_feedback":{"defaults":{},"path":"/feedbacks/new"},"edit_feedback":{"defaults":{},"path":"/feedbacks/:id/edit"},"feedback":{"defaults":{},"path":"/feedbacks/:id"},"root":{"defaults":{},"path":"/"},"photos":{"defaults":{},"path":"/photos"},"new_photo":{"defaults":{},"path":"/photos/new"},"edit_photo":{"defaults":{},"path":"/photos/:id/edit"},"photo":{"defaults":{},"path":"/photos/:id"}};
 
     self.defaultParams = {}
 
