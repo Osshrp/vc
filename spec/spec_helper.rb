@@ -1,4 +1,7 @@
 require 'capybara/poltergeist'
+require 'webmock/rspec'
+
+WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -31,4 +34,12 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
   Capybara.javascript_driver = :poltergeist
+
+  config.before(:each) do
+    stub_request(:get, "https://api.trello.com/1/boards/123/lists?key=111&token=11111").
+      to_return(:status => 200, :body => "", :headers => {})
+
+    stub_request(:post, "https://api.trello.com/1/cards").
+      to_return(:status => 200, :body => "", :headers => {})
+  end
 end

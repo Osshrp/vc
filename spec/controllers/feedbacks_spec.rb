@@ -19,7 +19,8 @@ describe FeedbacksController, type: :request do
       expect((JSON.parse(response.body)).first.keys)
         .to contain_exactly("id",
                             "email",
-                            "body")
+                            "body",
+                            "created_at")
     end
   end
 
@@ -33,8 +34,8 @@ describe FeedbacksController, type: :request do
                   }
                 }
     end
-    it "has a 201 status code" do
-      expect(response.status).to eq(201)
+    it "has a 200 status code" do
+      expect(response.status).to eq(200)
     end
 
     # it "returns 'Feedback created'" do
