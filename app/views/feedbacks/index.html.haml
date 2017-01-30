@@ -16,3 +16,6 @@
       %td.w1
         %a.btn.btn-danger(ng-click='ctrl.destroy(feedback)') Удалить
         %a.btn.btn-primary(ui-sref='edit_feedback_path(feedback)') Редактировать
+.form(ng-show='feedback.show')
+  %h2 New feedback
+  = render 'form'
