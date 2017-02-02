@@ -404,6 +404,11 @@ angular.module("oxymoron.services.resources", [])
         },
         "destroy": {
           "method": "DELETE"
+        },
+        "image": {
+          "url": "/photos/:photo_id/image.json",
+          "isArray": true,
+          "method": "POST"
         }
       }));
     }])
@@ -658,7 +663,7 @@ angular.module("oxymoron.directives", ['oxymoron.directives.fileupload', 'oxymor
 (function () {
   var Routes = function () {
     var self = this,
-        routes = {"rails_info_properties":{"defaults":{},"path":"/rails/info/properties"},"rails_info_routes":{"defaults":{},"path":"/rails/info/routes"},"rails_info":{"defaults":{},"path":"/rails/info"},"rails_mailers":{"defaults":{},"path":"/rails/mailers"},"feedbacks":{"defaults":{},"path":"/feedbacks"},"new_feedback":{"defaults":{},"path":"/feedbacks/new"},"edit_feedback":{"defaults":{},"path":"/feedbacks/:id/edit"},"feedback":{"defaults":{},"path":"/feedbacks/:id"},"root":{"defaults":{},"path":"/"},"photos":{"defaults":{},"path":"/photos"},"new_photo":{"defaults":{},"path":"/photos/new"},"edit_photo":{"defaults":{},"path":"/photos/:id/edit"},"photo":{"defaults":{},"path":"/photos/:id"}};
+        routes = {"rails_info_properties":{"defaults":{},"path":"/rails/info/properties"},"rails_info_routes":{"defaults":{},"path":"/rails/info/routes"},"rails_info":{"defaults":{},"path":"/rails/info"},"rails_mailers":{"defaults":{},"path":"/rails/mailers"},"feedbacks":{"defaults":{},"path":"/feedbacks"},"new_feedback":{"defaults":{},"path":"/feedbacks/new"},"edit_feedback":{"defaults":{},"path":"/feedbacks/:id/edit"},"feedback":{"defaults":{},"path":"/feedbacks/:id"},"root":{"defaults":{},"path":"/"},"photo_image":{"defaults":{},"path":"/photos/:photo_id/image"},"photos":{"defaults":{},"path":"/photos"},"new_photo":{"defaults":{},"path":"/photos/new"},"edit_photo":{"defaults":{},"path":"/photos/:id/edit"},"photo":{"defaults":{},"path":"/photos/:id"}};
 
     self.defaultParams = {}
 

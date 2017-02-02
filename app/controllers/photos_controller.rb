@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
-  # before_action :set_feedback, only: [:show, :edit, :update, :destroy]
+  before_action :set_photo, only: [:show, :edit, :update, :destroy]
   # protect_from_forgery with: :null_session
+  # respond_to :html
   respond_to :html, :json
 
   def index
@@ -11,10 +12,10 @@ class PhotosController < ApplicationController
   #   respond_with @photo
   # end
   #
-  # def new
-  #   @photo = Photo.new
-  #   respond_with @photo
-  # end
+  def new
+    @photo = Photo.new
+    respond_with @photo
+  end
   #
   # def edit
   #   respond_with @photo
@@ -22,9 +23,11 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new photo_params
+    # byebug
     if @photo.save
-      render json: {photo: @feedback, msg: 'Feedback successfully created',
+      render json: {photo: @photo, msg: 'Image successfully loaded',
                     redirect_to: 'photos_path'}
+      # respond_with @photo, location: photos_path
     else
       render json: {errors: @photo.errors,
                     msg: @photo.errors.full_messages.join(', ')},
@@ -32,28 +35,17 @@ class PhotosController < ApplicationController
     end
   end
 
-  # def update
-  #   if @feedback.update(feedback_params)
-  #     render json: {feedback: @feedback, msg: 'Feedback successfully updated',
-  #                   redirect_to: 'feedbacks_path'}
-  #   else
-  #     render json: {errors: @feedback.errors,
-  #                   msg: @feedback.errors.full_messages.join(', ')},
-  #                   status: 422
-  #   end
-  # end
-  #
-  # def destroy
-  #   respond_with @feedback.destroy
-  # end
+  def destroy
+    respond_with @photo.destroy
+  end
 
   private
 
-  def set_feedback
-    @feedback = Feedback.find params[:id]
-  end
-
   def photo_params
     params.require(:photo).permit(:image)
+  end
+
+  def set_photo
+    @photo = Photo.find params[:id]
   end
 end

@@ -1,5 +1,6 @@
 class FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
+  before_action :set_photo, only: [:index]
   # protect_from_forgery with: :null_session
   respond_to :html, :json
 
@@ -56,4 +57,8 @@ class FeedbacksController < ApplicationController
   def feedback_params
     params.require(:feedback).permit(:email, :body)
   end
+end
+
+def set_photo
+  @photo = Photo.all[0]
 end
