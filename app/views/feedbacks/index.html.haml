@@ -1,7 +1,7 @@
 %h1 feedbacks
 
 %input.form-control(type='text' ng-model='search' placeholder='Поиск')
-= img_tag @photo.image.thumb('100x100').url if @photo.image_stored?
+-# = img_tag @photo.image.thumb('100x100').url if @photo.image_stored?
 = link_to 'Загрузить фото', new_photo_path
 %table.table.table-bordered
   %thead

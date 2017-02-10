@@ -5,13 +5,14 @@ class PhotosController < ApplicationController
   respond_to :html, :json
 
   def index
+    @photos = Photo.all
     respond_with Photo.all
   end
 
-  # def show
-  #   respond_with @photo
-  # end
-  #
+  def show
+    respond_with @photo
+  end
+  
   def new
     @photo = Photo.new
     respond_with @photo
@@ -23,16 +24,15 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new photo_params
-    # byebug
-    if @photo.save
-      render json: {photo: @photo, msg: 'Image successfully loaded',
-                    redirect_to: 'photos_path'}
-      # respond_with @photo, location: photos_path
-    else
-      render json: {errors: @photo.errors,
-                    msg: @photo.errors.full_messages.join(', ')},
-                    status: 422
-    end
+    # if @photo.save
+    respond_with @photo.save, location: photos_path
+    #   render json: {photo: @photo, msg: 'Photo successfully loaded',
+    #                 redirect_to: 'photos_path'}
+    # else
+    #   render json: {errors: @photo.errors,
+    #                 msg: @photo.errors.full_messages.join(', ')},
+    #                 status: 422
+    # end
   end
 
   def destroy

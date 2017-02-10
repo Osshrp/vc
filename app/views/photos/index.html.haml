@@ -1,19 +1,9 @@
 %h1 Photos
 
 %input.form-control(type='text' ng-model='search' placeholder='Поиск')
--# = img_tag @photo.image.thumb('100x100').url if @photo.image_stored?
 = link_to 'Загрузить фото', new_photo_path
-%table.table.table-bordered
-  %thead
-    %tr
-      %th Date
-      %th Name
-      %th
-  %tbody
-    %tr(ng-repeat='photo in ctrl.photos | filter:search')
-      %td(ng-bind="photo.created_at | date:'dd.MM.yyyy HH:mm'")
-      %td
-        %a(ui-sref='photo_path(feedback)' ng-bind='photo.email')
-      %td.w1
-        %a.btn.btn-danger(ng-click='ctrl.destroy(photo)') Удалить
-        %a.btn.btn-primary(ui-sref='edit_photo_path(photo)') Редактировать
+.row
+  -@photos.each do |photo|
+    .col-xs-6.col-md-3
+      %a(href="#{photo_path(photo)}" class='thumbnail')
+        %img(src="#{photo.image.thumb('100x100').url}")
